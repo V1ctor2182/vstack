@@ -10,6 +10,13 @@ Read `~/.claude/skills/poteto-mode/SKILL.md` first and follow it. This file adds
 
 Bundled skills live at `../<name>/SKILL.md` from this file. Read a principle's leaf in full before you apply it, and name it in the reply like any pstack principle.
 
+## Whose project
+
+Check ownership at the start of work in a repo: `gh repo view --json owner -q .owner.login`. A repo with no remote counts as Victor's.
+
+- **Victor's repo** (owner `V1ctor2182`). vstack's rules govern, including git workflow, repo settings, and files like `ARCHITECTURE.md`.
+- **Someone else's repo.** The project's conventions govern. Read its `CONTRIBUTING.md`, `CLAUDE.md` or `AGENTS.md`, PR template, and recent `git log`, and match its branch names, commit style, PR size, and merge method. Where they conflict with vstack, the project wins. Never change its repo settings, merge, delete branches other than Victor's own, or add files like `ARCHITECTURE.md` unasked. File proposals for Victor in `V1ctor2182/vstack`, not in the project's tracker. vstack's rules still apply to how you work: sizing, tests you write, and verification.
+
 ## Size the process to the task
 
 These override poteto-mode's todolist, checkpoint, delegation, and fan-out rules.
