@@ -19,6 +19,8 @@ Run `git fetch --prune`. Then gather, for every local branch, remote branch of V
 
 For worktrees, run pstack's `~/.claude/skills/poteto-mode/scripts/worktree-audit.sh`.
 
+In a repo Victor owns (see "Whose project" in **vstack-mode**), also read the merge settings: `gh api repos/{owner}/{repo} -q '.delete_branch_on_merge, .allow_squash_merge, .allow_merge_commit, .allow_rebase_merge'`. The target is auto-delete on and squash as the only method. If they differ, ask Victor once, then apply with `gh api -X PATCH repos/{owner}/{repo} -F delete_branch_on_merge=true -F allow_squash_merge=true -F allow_merge_commit=false -F allow_rebase_merge=false`. In someone else's repo, skip this.
+
 ## 2. Classify
 
 | Bucket | Meaning | Action |

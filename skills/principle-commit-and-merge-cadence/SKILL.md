@@ -31,4 +31,4 @@ Branches stay healthy when work moves in small, verified steps and lands soon. L
 - **Merge only when all hold:** the change is verified on the real artifact, CI is green, review threads are resolved, and the branch is rebased on current `main` with no conflicts. Green CI alone is not enough.
 - **Victor merges** unless he granted merge rights for this work, such as an autopilot run. An agent with the grant follows pstack's Shipping playbook.
 - **Squash-merge. Land stacks bottom-up.** After the parent lands, rebase the child onto `main` and retarget its base to `main`.
-- **Delete after merge.** Remove the branch, local and remote, and its worktree.
+- **Clean up at merge time.** Whenever a merge happens in a session (you merged it, or Victor says he did), clean only that branch: `git fetch --prune`, delete the local branch and its worktree, delete the remote branch if GitHub didn't, and rebase each child PR onto `main` with its base retargeted to `main`. Leave every other branch to `/housekeep`.
