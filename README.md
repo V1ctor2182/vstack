@@ -20,7 +20,8 @@ The script symlinks each skill into `~/.claude/skills/` and adds one line to `~/
 | `principle-earn-every-test` | Adding, expanding, or editing a test. Write the fewest tests that catch real bugs. |
 | `principle-proposals-become-issues` | Proposing work outside the current change. File a `proposed` issue. Only `approved` issues are real work. |
 | `principle-keep-the-architecture-map` | Every task in a project. Keep a root `ARCHITECTURE.md` that matches the code, updated in the same change. |
-| `principle-continuous-housekeeping` | Every change, and regular project sweeps. Leave what you touched cleaner; turn the rest into `housekeeping` issues. |
+| `principle-commit-and-merge-cadence` | Committing, pushing, branching, stacking, merging. When each happens and what must hold before a merge. |
+| `housekeep` | Only when you type `/housekeep`. Audits branches, worktrees, and PRs, fixes what is safe, reports the rest. |
 
 ## Issues
 

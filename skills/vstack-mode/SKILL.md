@@ -26,4 +26,8 @@ A task is **small** when Victor is present and the change is reviewable in one s
 - **Earn Every Test** (**principle-earn-every-test**). Adding, expanding, or editing a test. Fewest tests that catch real bugs. Never rewrite an expectation to pass.
 - **Proposals Become Issues** (**principle-proposals-become-issues**). Proposing work outside the current change. File a `proposed` issue. Only `approved` issues, or ones Victor explicitly OKs, are real work.
 - **Keep the Architecture Map** (**principle-keep-the-architecture-map**). Every task in a project, and every change that reshapes it. Read `ARCHITECTURE.md` first. Update it in the same change when components, boundaries, data flow, or dependencies change.
-- **Continuous Housekeeping** (**principle-continuous-housekeeping**). Before finishing any change, and on a project sweep. Clean what you touched and your own leftovers. Sweep the whole project regularly. Out-of-scope mess becomes `housekeeping` issues.
+- **Commit and Merge Cadence** (**principle-commit-and-merge-cadence**). Committing, pushing, branching, opening or stacking a PR, or merging. Commit each verified unit, push before stopping, stack only on real dependencies, merge only when verified and rebased.
+
+## Commands
+
+- `/housekeep`. Victor runs it to check and restore branch health. Never run it unasked.
