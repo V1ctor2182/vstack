@@ -16,7 +16,7 @@ The script symlinks each skill into `~/.claude/skills/` and adds one line to `~/
 
 | Skill | Applies when |
 |---|---|
-| `vstack-mode` | Every session. The index of vstack principles. |
+| `vstack-mode` | Every session. Sizes the process to the task, makes multi-agent fan-out opt-in, and indexes vstack principles. |
 | `principle-earn-every-test` | Adding, expanding, or editing a test. Write the fewest tests that catch real bugs. |
 | `principle-proposals-become-issues` | Proposing work outside the current change. File a `proposed` issue. Only `approved` issues are real work. |
 
