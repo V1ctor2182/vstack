@@ -21,6 +21,7 @@ The script symlinks each skill into `~/.claude/skills/` and adds one line to `~/
 | `principle-proposals-become-issues` | Proposing work outside the current change. File a `proposed` issue. Only `approved` issues are real work. |
 | `principle-keep-the-architecture-map` | Every task in a project. Keep a root `ARCHITECTURE.md` that matches the code, updated in the same change. |
 | `principle-commit-and-merge-cadence` | Committing, pushing, branching, stacking, merging. When each happens and what must hold before a merge. |
+| `principle-grow-boundaries-on-demand` | Adding an abstraction, layer, module, or service. Modules first, abstract on the second use, split services only for a named reason. |
 | `housekeep` | Only when you type `/housekeep`. Audits branches, worktrees, and PRs, fixes what is safe, reports the rest. |
 
 ## Issues
