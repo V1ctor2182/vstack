@@ -19,6 +19,6 @@ Structure grows in steps: function, module, package, service. Each step costs mo
   "Might need to scale later" is not a reason.
 - **No pass-through layers.** A layer or service that only forwards calls gets deleted (**principle-minimize-reader-load**).
 - **Extensible means clean seams.** A module with a small surface and its own data can be extracted later. That is the extension plan, not layers added now.
-- **Record every step up.** Adding a module, package, or service updates `ARCHITECTURE.md` components and changelog with the reason (**principle-keep-the-architecture-map**).
+- **Record every step up.** Adding a module, package, or service updates the `ARCHITECTURE.md` Components table, with its level and the reason in "Why this level" (**principle-keep-the-architecture-map**).
 
 In someone else's repo, follow their existing architecture.

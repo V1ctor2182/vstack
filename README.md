@@ -24,6 +24,13 @@ The script symlinks each skill into `~/.claude/skills/` and adds one line to `~/
 | `principle-grow-boundaries-on-demand` | Adding an abstraction, layer, module, or service. Modules first, abstract on the second use, split services only for a named reason. |
 | `housekeep` | Only when you type `/housekeep`. Audits branches, worktrees, and PRs, fixes what is safe, reports the rest. |
 
+## Hooks and templates
+
+- `hooks/arch-map-check.sh`. Claude Code `PreToolUse` hook that `install.sh` registers. In Victor's repos, it blocks an agent's `git commit` that changes the project's structure without touching `ARCHITECTURE.md`. A commit can pass with the trailer `Arch-Map: unchanged — <reason>`.
+- `templates/ARCHITECTURE.md`. The starting point for every project's architecture map.
+
+`install.sh` also links this repo to `~/.claude/vstack` so both have a stable path.
+
 ## Issues
 
 Agents file proposals here with the `proposed` label. Add `approved` to green-light one.
