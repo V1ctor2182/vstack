@@ -21,4 +21,4 @@ If the victor-ui tools aren't loaded in this session, say so and continue withou
 
 ## Give new components back
 
-When a merged change in Victor's repo adds a reusable component the gallery lacks, name it in the merge-time candidates (**principle-commit-and-merge-cadence**). Victor confirms which to save. Saving one goes through victor-ui's own process, with its own issue or PR in V1ctor2182/victor-ui. Never edit victor-ui as a side effect of other work.
+When a merged change in Victor's repo adds a reusable component the gallery lacks, name it in the merge-time candidates (**principle-commit-and-merge-cadence**). Victor confirms which to save. Until victor-ui has an own-component path (V1ctor2182/victor-ui#22), add each confirmed one as a comment on that issue. After that, follow its process. Never edit victor-ui as a side effect of other work.
