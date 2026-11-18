@@ -33,7 +33,7 @@ A task is **small** when Victor is present and the change is reviewable in one s
 - **Earn Every Test** (**principle-earn-every-test**). Adding, expanding, or editing a test. Fewest tests that catch real bugs. Never rewrite an expectation to pass.
 - **Proposals Become Issues** (**principle-proposals-become-issues**). Proposing work outside the current change. File a `proposed` issue. Only `approved` issues, or ones Victor explicitly OKs, are real work.
 - **Keep the Architecture Map** (**principle-keep-the-architecture-map**). Every task in a project, and every change that reshapes it. Read `ARCHITECTURE.md` first. Update it in the same change when components, boundaries, data flow, or dependencies change.
-- **Commit and Merge Cadence** (**principle-commit-and-merge-cadence**). Committing, pushing, branching, opening or stacking a PR, or merging. Commit each verified unit, push before stopping, stack only on real dependencies, merge only when verified and rebased.
+- **Commit and Merge Cadence** (**principle-commit-and-merge-cadence**). Starting a task, committing, pushing, branching, opening or stacking a PR, or merging. Pick and name where to work (same branch, new branch, or a worktree at `~/victor/<repo>-<topic>`), commit each verified unit, push before stopping, stack only on real dependencies, merge only when verified and rebased.
 - **Grow Boundaries on Demand** (**principle-grow-boundaries-on-demand**). Adding an abstraction, layer, module, package, or service. Modules first, abstract on the second use, split a service only for a named reason.
 - **UI from victor-ui** (**principle-ui-from-victor-ui**). About to write a new UI component. Search Victor's gallery through the victor-ui MCP, inspect, adapt, verify the render, and name what you used.
 
@@ -48,4 +48,4 @@ Recorded context (decisions, constraints, conventions, docs) lives in Git-tracke
 
 ## Commands
 
-- `/housekeep`. Victor runs it to check and restore branch health. Never run it unasked.
+- `/housekeep`. Victor runs it to check and restore branch health in the current repo, including sorting uncommitted work into pushed branches after he confirms. Never run it unasked.
