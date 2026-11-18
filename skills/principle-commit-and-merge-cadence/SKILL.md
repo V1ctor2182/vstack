@@ -1,6 +1,6 @@
 ---
 name: principle-commit-and-merge-cadence
-description: "Apply whenever you commit, push, branch, open or stack a PR, or merge. When each happens, how big each is, and what must be true before a merge."
+description: "Apply at the start of every task (where to work: same branch, new branch, or new worktree) and whenever you commit, push, branch, open or stack a PR, or merge. When each happens, how big each is, and what must be true before a merge."
 disable-model-invocation: true
 ---
 
@@ -13,6 +13,19 @@ Branches stay healthy when work moves in small, verified steps and lands soon. L
 - **Commit when a unit is verified.** Each time one logical change reaches a state that passes its check, commit it. Don't wait for the end of a session, and don't commit a broken state.
 - **One logical change per commit.** Cleanup, refactor, and behavior change go in separate commits. Title in Conventional Commits: `type(scope): subject`.
 - **Clean before you commit.** No debug prints, commented-out code, temp files, unused imports, or unrelated edits. Never commit secrets or generated files.
+
+## Where to work
+
+Decide at the start of every task, and say it in one line ("Same branch, continuing #12", or "New worktree: the main folder has unfinished work").
+
+| Situation | Where |
+|---|---|
+| Continuing the same change or PR | Same branch, same folder |
+| A new, unrelated change. The folder is clean and pushed, and nothing else runs in it | New branch from fresh `main`, same folder |
+| The folder has unfinished work, another session or agent works in it, or two things run at once (one waits on CI or review) | New worktree at `~/victor/<repo>-<topic>` on a new branch |
+| A second clone | Never. A worktree covers it |
+
+Never create a worktree in `/tmp`. Remove the worktree when its branch merges.
 
 ## Push and branch
 
