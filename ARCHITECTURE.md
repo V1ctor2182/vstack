@@ -1,6 +1,6 @@
 # Architecture: vstack
 
-> Last verified against code: 2026-11-18 (commit 5fbff69 plus the context-layer change)
+> Last verified against code: 2026-11-18 (commit e76329a plus the victor-ui principle)
 
 ## Purpose
 
@@ -58,3 +58,4 @@ flowchart LR
 | Claude Code hooks | arch-map-check | `~/.claude/settings.json` |
 | GitHub via `gh` | housekeep, proposals-become-issues | `gh` CLI |
 | Node.js | context layer | `node` runs `vh.mjs`, no packages |
+| victor-ui MCP | principle-ui-from-victor-ui | user-scope HTTP server `victor-ui` in `~/.claude.json`; access code never in this repo |
