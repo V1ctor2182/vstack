@@ -10,9 +10,14 @@ case "$cmd" in *"git commit"*) ;; *) exit 0 ;; esac
 case "$cmd" in *"Arch-Map: unchanged"*) exit 0 ;; esac
 
 dir="$(printf '%s' "$input" | jq -r '.cwd // empty')"
-# Honor a leading `cd <dir> &&`.
-cd_target="$(printf '%s' "$cmd" | sed -n 's/^[[:space:]]*cd[[:space:]]\{1,\}\([^;&|[:space:]]*\).*/\1/p')"
-[ -n "$cd_target" ] && dir="$(cd "${dir:-.}" 2>/dev/null && cd "${cd_target/#\~/$HOME}" 2>/dev/null && pwd)"
+# Follow every `cd <dir>` before the commit, in order, so the commit's own repo is checked.
+before_commit="${cmd%%git commit*}"
+while read -r target; do
+  [ -n "$target" ] || continue
+  dir="$(cd "${dir:-.}" 2>/dev/null && cd "${target/#\~/$HOME}" 2>/dev/null && pwd)" || exit 0
+done <<EOF
+$(printf '%s\n' "$before_commit" | grep -oE '(^|[;&|[:space:]])cd[[:space:]]+[^;&|[:space:]]+' | sed -E 's/^.*cd[[:space:]]+//')
+EOF
 cd "${dir:-.}" 2>/dev/null || exit 0
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 
