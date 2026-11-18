@@ -36,6 +36,15 @@ A task is **small** when Victor is present and the change is reviewable in one s
 - **Commit and Merge Cadence** (**principle-commit-and-merge-cadence**). Committing, pushing, branching, opening or stacking a PR, or merging. Commit each verified unit, push before stopping, stack only on real dependencies, merge only when verified and rebased.
 - **Grow Boundaries on Demand** (**principle-grow-boundaries-on-demand**). Adding an abstraction, layer, module, package, or service. Modules first, abstract on the second use, split a service only for a named reason.
 
+## Project context
+
+Recorded context (decisions, constraints, conventions, docs) lives in Git-tracked Rooms under `.vibehub/rooms/`. `ARCHITECTURE.md` is the one-page map that links to them.
+
+- **context-query.** Before working in a repo with `.vibehub/`, query the Rooms the task touches. Also use it for any why-question.
+- **context-record.** Write context when Victor says 记一下 or remember, or when he confirms merge-time candidates. Never record on your own.
+- **context-setup**, **context-rooms**, **context-migrate.** Use these to set up a repo, build its Room tree, or upgrade an old format. Migrate only with Victor's OK.
+- **Never create VibeHub Tickets, Goals, or Epics.** Work goes in GitHub issues (Proposals Become Issues).
+
 ## Commands
 
 - `/housekeep`. Victor runs it to check and restore branch health. Never run it unasked.

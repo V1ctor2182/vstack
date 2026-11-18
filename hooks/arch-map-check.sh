@@ -42,6 +42,7 @@ printf '%s\n' "$changed" | grep -qx 'ARCHITECTURE.md' && exit 0
 # Structural units: top-level dirs, first-level dirs under module roots, manifests, infra files.
 units() {
   awk -F/ '
+    $1 == ".vibehub" { next }
     NF > 1 { print "dir " $1 }
     NF > 2 && $1 ~ /^(src|apps|packages|services|lib)$/ { print "dir " $1 "/" $2 }
     { n = $NF }

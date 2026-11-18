@@ -18,12 +18,12 @@ flowchart LR
 
 ## Components
 
-| Name | Path | Owns | Level | Why this level |
-|---|---|---|---|---|
-| api | src/api | orders, users | module | — |
-| worker | services/worker | background jobs | service | scales independently |
+| Name | Path | Owns | Level | Why this level | Room |
+|---|---|---|---|---|---|
+| api | src/api | orders, users | module | — | `.vibehub/rooms/api` |
+| worker | services/worker | background jobs | service | scales independently | `.vibehub/rooms/worker` |
 
-Level is module, package, or service. A module needs no reason. A package or service names its reason (principle-grow-boundaries-on-demand).
+Level is module, package, or service. A module needs no reason. A package or service names its reason (principle-grow-boundaries-on-demand). Room is where that component's decisions, constraints, and docs live (context-query); leave it blank until the repo has `.vibehub/`.
 
 ## Key flows
 
