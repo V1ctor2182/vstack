@@ -23,6 +23,7 @@ The script symlinks each skill into `~/.claude/skills/` and adds one line to `~/
 | `principle-commit-and-merge-cadence` | Starting a task, committing, pushing, branching, stacking, merging. Where to work, when each step happens, and what must hold before a merge. |
 | `principle-grow-boundaries-on-demand` | Adding an abstraction, layer, module, or service. Modules first, abstract on the second use, split services only for a named reason. |
 | `principle-ui-from-victor-ui` | Writing a new UI component. Start from Victor's gallery through the victor-ui MCP, adapt, verify the render. |
+| `principle-design-floor` | Building or showing any UI. Nine things Victor never wants to see, a screenshot check before showing, and a complaint log that grows the floor. |
 | `context-query` | Before working in a repo with `.vibehub/`, and for why-questions. Reads recorded context from its Rooms. |
 | `context-record` | Victor says 记一下, or confirms merge-time candidates. Writes one claim per document into the owning Room. |
 | `context-setup`, `context-rooms`, `context-migrate` | Setting up `.vibehub/` (shared, committed), building the Room tree, upgrading an old format. |
