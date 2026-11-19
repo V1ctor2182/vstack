@@ -36,6 +36,7 @@ A task is **small** when Victor is present and the change is reviewable in one s
 - **Commit and Merge Cadence** (**principle-commit-and-merge-cadence**). Starting a task, committing, pushing, branching, opening or stacking a PR, or merging. Pick and name where to work (same branch, new branch, or a worktree at `~/victor/<repo>-<topic>`), commit each verified unit, push before stopping, stack only on real dependencies, merge only when verified and rebased.
 - **Grow Boundaries on Demand** (**principle-grow-boundaries-on-demand**). Adding an abstraction, layer, module, package, or service. Modules first, abstract on the second use, split a service only for a named reason.
 - **UI from victor-ui** (**principle-ui-from-victor-ui**). About to write a new UI component. Search Victor's gallery through the victor-ui MCP, inspect, adapt, verify the render, and name what you used.
+- **Design Floor** (**principle-design-floor**). Building or restyling any UI, before showing Victor a UI, and when he calls one ugly, cheap, or AI-ish. Keep the nine floor lines, screenshot-check before showing, and log his complaints so the floor grows.
 
 ## Project context
 

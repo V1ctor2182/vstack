@@ -14,7 +14,7 @@ Victor keeps a gallery of components he has collected and built. A new component
 2. **Inspect before choosing.** Call `get_component` on each candidate, and continue with `read_component_source` if the result is truncated. Read the source, the demonstrated usage, the dependencies, the CSS, and the license.
 3. **Check the license against the repo.** In a private repo, use the item. Before putting gallery code into a **public** repo, read the item's license. If its terms forbid redistribution, ask Victor first.
 4. **Adapt it.** Fit the project's framework, styling system, existing components, and design rules. Gallery items are references, not packages. Keep keyboard access, visible focus, reduced motion, and responsive behavior.
-5. **Verify the render.** Open it in a browser in the consuming project and check it works, including keyboard and focus.
+5. **Verify the render.** Open it in a browser in the consuming project and check it works, including keyboard and focus. Then run the floor check (**principle-design-floor**).
 6. **Say what you used.** One line in the reply: "Started from victor-ui `sidebar`", or "Nothing in victor-ui fit; wrote `X`".
 
 If the victor-ui tools aren't loaded in this session, say so and continue without them.

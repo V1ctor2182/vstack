@@ -1,6 +1,6 @@
 # Architecture: vstack
 
-> Last verified against code: 2026-11-18 (commit e76329a plus the victor-ui principle)
+> Last verified against code: 2026-11-19 (plus the design-floor principle)
 
 ## Purpose
 
@@ -40,6 +40,7 @@ flowchart LR
 
 - **Session start:** pstack's `hook.sh` injects PSTACK.md → agent reads poteto-mode → vstack marker → agent reads vstack-mode → principles read on trigger.
 - **Merge:** merge cleanup → agent lists context candidates → Victor confirms → context-record → `vh context put` → `.vibehub/rooms/<room>/` committed.
+- **Design complaint:** Victor calls a UI ugly or AI-ish (in any repo) → agent appends to `skills/principle-design-floor/log.md` in vstack → a repeat with no floor line becomes a merge-time candidate → Victor confirms → the line joins the floor table.
 - **Agent commit:** Claude Code PreToolUse → arch-map-check.sh → exit 2 with a message if the structure changed without ARCHITECTURE.md.
 
 ## Boundaries and invariants
