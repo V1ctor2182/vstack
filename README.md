@@ -1,18 +1,18 @@
 # vstack
 
-Victor's agent skills for Claude Code, layered on [pstack](https://github.com/cursor/plugins/tree/main/pstack). pstack's `poteto-mode` sets the base workflow. `vstack-mode` adds Victor's principles and wins where they conflict.
+Victor's agent skills for Claude Code. vstack began as a layer on [pstack](https://github.com/cursor/plugins/tree/main/pstack) and now carries its own fork of it (see `NOTICE.md`, MIT). `poteto-mode` sets the base workflow. `vstack-mode` adds Victor's principles and wins where they conflict. Issue #21 tracks turning the two into one.
 
 ## Install
-
-Install pstack first, then:
 
 ```bash
 ./install.sh
 ```
 
-The script symlinks each skill into `~/.claude/skills/` and adds one line to `~/.claude/pstack/PSTACK.md` so every session reads `vstack-mode` after `poteto-mode`. pstack updates don't touch vstack skills.
+The script symlinks every skill into `~/.claude/skills/` and every agent into `~/.claude/agents/`, and registers `hooks/session.sh` so every session starts in poteto-mode and then reads `vstack-mode`. If an old pstack install is present, it moves `~/.claude/pstack` and the copied skills into `~/.claude/vstack-backup/<time>/` and removes pstack's hook. Nothing syncs from upstream anymore.
 
 ## Skills
+
+The forked pstack skills (`poteto-mode`, its playbooks, `principle-*` leaves, `architect`, `unslop`, and the rest) are listed in `NOTICE.md`. vstack's own:
 
 | Skill | Applies when |
 |---|---|
@@ -32,6 +32,7 @@ The script symlinks each skill into `~/.claude/skills/` and adds one line to `~/
 
 ## Hooks and templates
 
+- `hooks/session.sh` with `hooks/session.md`. Claude Code `SessionStart` and `UserPromptSubmit` hook. It injects the Claude Code host mappings and turns on poteto-mode and vstack-mode.
 - `hooks/arch-map-check.sh`. Claude Code `PreToolUse` hook that `install.sh` registers. In Victor's repos, it blocks an agent's `git commit` that changes the project's structure without touching `ARCHITECTURE.md`. A commit can pass with the trailer `Arch-Map: unchanged — <reason>`.
 - `templates/ARCHITECTURE.md`. The starting point for every project's architecture map.
 
