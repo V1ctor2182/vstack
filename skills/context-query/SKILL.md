@@ -34,6 +34,8 @@ vh context governing --repo <root> --input <governing.json>
 
 `governing.json` is `{"paths":["src/api"]}`. The result lists each active `authority` Context that covers those paths, with its canonical artifacts, `update_rules`, `validation`, and `approval`. Follow its `update_rules` before changing a canonical artifact. An empty list means nothing governs those paths.
 
+To give the human one page of everything recorded, run `vh context page --repo <root>` and hand over the `path` it prints. The page is a static HTML file written outside the repo.
+
 ## Reply
 
 - Report the relevant Context ids, their claims, sources, and any conflict or gap.

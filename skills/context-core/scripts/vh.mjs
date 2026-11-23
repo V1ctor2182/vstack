@@ -13,8 +13,10 @@ import {
 } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
+import { homedir } from "node:os";
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import { renderContextPage } from "./context-page.mjs";
 import { readSessions, ticketSessionCapability } from "./session-store.mjs";
 import {
   REVISION_BINDING_ORIGINS,
@@ -97,11 +99,13 @@ function parseArgs(argv) {
   let scope = null;
   let delivery = null;
   let path = null;
+  let out = null;
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index];
     if (value === "--repo") repo = argv[++index] ?? "";
     else if (value === "--input") inputPath = argv[++index] ?? "";
     else if (value === "--path") path = argv[++index] ?? "";
+    else if (value === "--out") out = argv[++index] ?? "";
     else if (value === "--room") {
       room = argv[++index] ?? "";
       rooms.push(room);
@@ -116,7 +120,7 @@ function parseArgs(argv) {
   if (positionals.length !== 2) {
     throw new VibeHubError(
       "invalid_argument",
-      "Usage: vh.mjs <context|room|goal|epic|ticket|project|source|skills> <operation> --repo <path> [--input <json>] [--scope <current|all>] [--delivery <canonical-ref>] [--room <path>]... [--path <file>]; goal/epic support put/get/list; project supports hierarchy, migrate-mechanical and migrate-proof-revisions",
+      "Usage: vh.mjs <context|room|goal|epic|ticket|project|source|skills> <operation> --repo <path> [--input <json>] [--scope <current|all>] [--delivery <canonical-ref>] [--room <path>]... [--path <file>] [--out <file>]; goal/epic support put/get/list; project supports hierarchy, migrate-mechanical and migrate-proof-revisions",
     );
   }
   if (room !== null && (room === "" || !room.split("/").every((segment) => ID.test(segment)))) {
@@ -132,6 +136,7 @@ function parseArgs(argv) {
     scope,
     delivery,
     path,
+    out,
   };
 }
 
@@ -2457,6 +2462,7 @@ function contextOperation(operation, repo, input, options = {}) {
   if (operation === "coverage") return contextCoverage(repo, repository, options.room ?? null);
   if (operation === "governing") return contextGoverning(repo, repository, input);
   if (operation === "guard") return contextGuard(repo, repository, input);
+  if (operation === "page") return contextPage(repo, repository, options.out ?? null);
   if (operation === "get") {
     if (typeof input.context_id !== "string" || !ID.test(input.context_id)) {
       throw new VibeHubError("invalid_input", "context get needs a valid context_id");
@@ -2491,6 +2497,31 @@ function contextOperation(operation, repo, input, options = {}) {
     return { contexts: matches, count: matches.length };
   }
   throw new VibeHubError("unsupported_operation", `Unsupported context operation: ${operation}`);
+}
+
+// The page is a view for the human, not project state, so it is written
+// outside the repo by default and never under .vibehub/.
+function contextPage(repo, repository, out) {
+  const repoName = basename(resolve(repo));
+  const path = out ? resolve(out) : join(homedir(), ".cache", "vstack", "context", `${repoName}.html`);
+  if (path === repository.paths.root || path.startsWith(repository.paths.root + sep)) {
+    throw new VibeHubError("invalid_argument", "context page is read-only for .vibehub/; pass --out a path outside it");
+  }
+  const byRoom = new Map();
+  for (const { document, path: contextPath } of repository.contexts.documents.values()) {
+    const room = contextRoomPath(repository, contextPath);
+    byRoom.set(room, [...(byRoom.get(room) ?? []), document]);
+  }
+  const rooms = [...byRoom].map(([roomPath, contexts]) => ({ path: roomPath, contexts }));
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, renderContextPage({ repoName, rooms }));
+  return {
+    status: "written",
+    path,
+    rooms: rooms.length,
+    contexts: repository.contexts.documents.size,
+    active: [...repository.contexts.documents.values()].filter(({ document }) => document.state === "active").length,
+  };
 }
 
 // ---- Authority Context: governing lookup and the change guard ----------------
@@ -4838,7 +4869,7 @@ function run() {
   if (!existsSync(args.repo)) throw new VibeHubError("not_found", `Repository path does not exist: ${args.repo}`);
   const input = readInput(args.inputPath);
   let data;
-  if (args.domain === "context") data = contextOperation(args.operation, args.repo, input, { room: args.room });
+  if (args.domain === "context") data = contextOperation(args.operation, args.repo, input, { room: args.room, out: args.out });
   else if (args.domain === "room") data = roomOperation(args.operation, args.repo, input, { room: args.room });
   else if (args.domain === "goal" || args.domain === "epic") data = planningOperation(args.domain, args.operation, args.repo, input);
   else if (args.domain === "ticket") data = ticketOperation(args.operation, args.repo, input, {
