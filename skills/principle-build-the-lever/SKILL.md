@@ -17,6 +17,7 @@ Default to building the lever. Skip it only when the task is trivial, a couple o
 - When you fan work out to subagents, write the lever as a skill they all read: the recipe, the verification contract, and the do-not-touch fences in one artifact. Keep it outside the delegates' write scope so they can't quietly edit the contract.
 - Applying this principle produces a file. If you cited it and there is no codemod, script, generator, or delegate skill in the diff, you didn't apply it.
 - Commit the lever when the work outlives the session.
+- A lever useful in more than one repo becomes a tool factory atom (`factory new`, `factory link`). A one-repo lever stays in that repo.
 
 The bar is triviality, not repetition. A one-off still earns a lever when the lever is what makes the work checkable. Per the [Laziness Protocol](../principle-laziness-protocol/SKILL.md), build the smallest script that does or proves the job, never a framework.
 

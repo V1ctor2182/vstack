@@ -14,6 +14,8 @@ Check the real thing, not a proxy:
 - Check process liveness directly, not indirectly through derived state
 - Read the actual value, not a cached or derived representation
 - When verification fails, suspect the observation method before suspecting the system
+- Verify at the address the human will open. "Live" means the public address, not a local port
+- Clean up after: close the tabs you opened and remove the worktrees you made. Leave the preview server running until told
 
 ## Script the check when you can
 

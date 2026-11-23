@@ -1,5 +1,5 @@
 #!/bin/sh
-# Installs vstack for Claude Code: links skills and agents, turns vstack on in every session,
+# Installs vstack for Claude Code: links skills and agents, removes links to ones it dropped, turns vstack on in every session,
 # and registers the arch-map-check hook. Safe to rerun.
 # Retires an old pstack install (~/.claude/pstack and its copied skills) by moving it to a backup folder.
 set -eu
@@ -20,6 +20,11 @@ make_room() {
 }
 
 mkdir -p "$claude/skills" "$claude/agents"
+# Drop links to skills and agents this repo no longer has.
+for link in "$claude"/skills/* "$claude"/agents/*; do
+  [ -L "$link" ] || continue
+  case "$(readlink "$link")" in "$vstack"/*) [ -e "$link" ] || rm "$link" ;; esac
+done
 for dir in "$vstack"/skills/*/; do
   name="$(basename "$dir")"
   make_room "$claude/skills/$name" skills

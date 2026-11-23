@@ -14,4 +14,4 @@ A proposal that lives only in chat is lost when the chat ends. Write it down whe
 - **`proposed` is not work.** Never implement a `proposed` issue. Work starts only when the issue carries `approved`, or when the user explicitly OKs that specific issue in chat. Then add the `approved` label yourself and note the approval in a comment. Approval is per issue, never blanket.
 - **Don't file noise.** In-scope work you were asked for: just do it. File only proposals that need the user's decision.
 
-This narrows the **principle-never-block-on-the-human** skill: reversible in-scope work still proceeds without asking. Out-of-scope ideas become issues, not unasked-for code.
+Reversible in-scope work still proceeds without asking. Out-of-scope ideas become issues, not unasked-for code.
