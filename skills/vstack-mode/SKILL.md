@@ -42,6 +42,7 @@ A task is **small** when the human is present and the change is reviewable in on
 - One OK lasts: merging a green PR, deploying a project the human already approved.
 - Ask every time, in one sentence with two buttons: force push, close a PR, @ a real person, touch another repo, delete data, spend money, change a running system.
 - Ask only what the human alone can answer.
+- When the human says "going to bed" or "run until done", keep going. Still never do the ask-every-time list unattended. Skip that step, finish the rest, and list what was skipped.
 - Before changing a rule, a skill, or a design the human will live with, list each change (the file, and the line to add or replace) and wait for a yes.
 
 ## The human's tools
@@ -110,6 +111,7 @@ For a large task, open the playbook and follow it.
 - **shipping.** Verifying and landing a green stack.
 - **autopilot-full.** A queue of independent PRs run to merged. Only with a merge grant.
 - **autopilot-stack.** A queue of PRs built and verified, then handed back to land.
+- **autonomous-run.** A long task driven to a stated finish without stopping.
 - **session-pickup.** Taking over in-flight work.
 - **worktree-cleanup.** Reclaiming disk from old worktrees.
 
