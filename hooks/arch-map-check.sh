@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code PreToolUse hook (Bash). Blocks an agent's `git commit` in Victor's repos
-# when the change reshapes the project but leaves ARCHITECTURE.md untouched.
+# when the repo has an ARCHITECTURE.md and the change reshapes the project but leaves it untouched.
 # See skills/principle-keep-the-architecture-map. Exit 2 blocks; stderr goes to the agent.
 set -u
 
@@ -20,6 +20,9 @@ $(printf '%s\n' "$before_commit" | grep -oE '(^|[;&|[:space:]])cd[[:space:]]+[^;
 EOF
 cd "${dir:-.}" 2>/dev/null || exit 0
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
+cd "$(git rev-parse --show-toplevel)" || exit 0
+# A repo opts in by having the map. Without one, nothing is enforced.
+[ -f ARCHITECTURE.md ] || exit 0
 
 origin="$(git remote get-url origin 2>/dev/null || true)"
 if [ -n "$origin" ]; then
@@ -55,11 +58,7 @@ hits="$(comm -3 <(printf '%s\n' "$before" | units) <(printf '%s\n' "$after" | un
   sed -e 's/^\t/added: /' -e '/^added: /!s/^/removed: /')"
 [ -z "$hits" ] && exit 0
 
-if [ -f ARCHITECTURE.md ]; then
-  fix="Update ARCHITECTURE.md in this commit (Components, Diagram, Key flows as needed) and refresh Last verified."
-else
-  fix="This repo has no ARCHITECTURE.md. Create it from ~/.claude/vstack/templates/ARCHITECTURE.md in this commit."
-fi
+fix="Update ARCHITECTURE.md in this commit (Components, Diagram, Key flows as needed) and refresh Last verified."
 {
   echo "arch-map-check: this commit changes the project's structure but not ARCHITECTURE.md."
   printf '%s\n' "$hits" | head -20 | sed 's/^/  /'

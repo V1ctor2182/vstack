@@ -16,3 +16,5 @@ Make simplification a continual investment. Leave the design slightly simpler an
 - No speculative validators, parsers, or guards beyond what the spec demands
 - Simplify prompts (remove redundant instructions, excessive templates)
 - When a reference has no novel content, delete it rather than leaving a stub
+- When the human asks why something is needed, offer removing it first.
+- Run anything that costs money or time once, not three times.
