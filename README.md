@@ -8,7 +8,7 @@ Victor's agent skills for Claude Code. vstack began as a layer on [pstack](https
 ./install.sh
 ```
 
-The script symlinks every skill into `~/.claude/skills/` and every agent into `~/.claude/agents/`, removes its own links to skills it no longer has, and registers `hooks/session.sh` so every session starts in `vstack-mode`. `vstack-mode` also points to Victor's own tools: the tool factory (`factory`, `writing-style`), victor-ui, and artifact-index. The script does not install those.
+The script symlinks every skill into `~/.claude/skills/` and every agent into `~/.claude/agents/`, removes its own links to skills it no longer has, and registers `hooks/session.sh` so every session starts in `vstack-mode`. `vstack-mode` also points to Victor's own tools: the tool factory (`factory`, `writing-style`), victor-ui, and artifact-index. The script does not install those. It ends by checking them and printing the fix for each one that is missing. `./install.sh --check` runs only the check.
 
 ## Skills
 

@@ -1,6 +1,7 @@
 #!/bin/sh
 # Installs vstack for Claude Code: links skills and agents, removes links to ones it dropped, turns vstack on in every session,
 # and registers the arch-map-check hook. Safe to rerun.
+# Ends with a check of the outside tools vstack points to. `./install.sh --check` runs only that check.
 # Retires an old pstack install (~/.claude/pstack and its copied skills) by moving it to a backup folder.
 set -eu
 
@@ -9,6 +10,34 @@ claude="$HOME/.claude"
 backup="$claude/vstack-backup/$(date +%Y%m%d-%H%M%S)"
 settings="$claude/settings.json"
 moved=""
+
+# Print one line per outside tool: ok, or missing with the command that fixes it. Never exits on a miss.
+report() {
+  if [ "$2" = yes ]; then printf '  %-16s ok\n' "$1"; else printf '  %-16s missing -> %s\n' "$1" "$3"; missing=1; fi
+}
+has_cmd() { if command -v "$1" >/dev/null 2>&1; then echo yes; else echo no; fi; }
+has_mcp() {
+  if command -v jq >/dev/null 2>&1 && [ -f "$HOME/.claude.json" ] &&
+    jq -e --arg n "$1" '.mcpServers[$n] // empty' "$HOME/.claude.json" >/dev/null 2>&1; then echo yes; else echo no; fi
+}
+mcp_fix() {
+  echo "on a machine that has it run 'claude mcp get $1' for the URL, then: claude mcp add --transport http --scope user $1 <url> --header 'Authorization: Bearer <access code>'"
+}
+check() {
+  missing=""
+  echo "vstack check:"
+  report "skills" "$(if [ -f "$claude/skills/vstack-mode/SKILL.md" ]; then echo yes; else echo no; fi)" "run ./install.sh"
+  report "jq" "$(has_cmd jq)" "brew install jq"
+  report "gh" "$(has_cmd gh)" "brew install gh, then: gh auth login"
+  report "node" "$(has_cmd node)" "brew install node"
+  report "factory" "$(has_cmd factory)" "clone the tool factory, then: ln -s <tool-factory>/factory/bin/factory.mjs ~/.local/bin/factory"
+  report "writing-style" "$(if [ -f "$claude/skills/writing-style/SKILL.md" ]; then echo yes; else echo no; fi)" "in a tool factory checkout that stays on main: node factory/bin/factory.mjs link writing-style --global"
+  report "victor-ui" "$(has_mcp victor-ui)" "$(mcp_fix victor-ui)"
+  report "artifact-index" "$(has_mcp artifact-index)" "$(mcp_fix artifact-index)"
+  if [ -n "$missing" ]; then echo "Some tools are missing. vstack still loads. The rules that name them will say so."; fi
+}
+if [ "${1:-}" = "--check" ]; then check; exit 0; fi
+if ! command -v jq >/dev/null 2>&1; then echo "install.sh needs jq to edit $settings. Run: brew install jq" >&2; exit 1; fi
 
 # Move a real file or folder out of the way before a link takes its place.
 make_room() {
@@ -57,3 +86,4 @@ jq '
 
 if [ -n "$moved" ]; then echo "Moved replaced files to $backup"; fi
 echo "vstack installed: $(ls "$vstack"/skills | wc -l | tr -d ' ') skills, $(ls "$vstack"/agents | wc -l | tr -d ' ') agents"
+check
