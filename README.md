@@ -32,7 +32,7 @@ The skills that came from pstack are listed in `NOTICE.md`. vstack's own:
 
 ## Hooks and templates
 
-- `hooks/session.sh` with `hooks/session.md`. Claude Code `SessionStart` and `UserPromptSubmit` hook. It injects the Claude Code host mappings and turns on vstack-mode.
+- `hooks/session.sh` with `hooks/session.md`. Claude Code `SessionStart` and `UserPromptSubmit` hook. It turns on vstack-mode.
 - `hooks/arch-map-check.sh`. Claude Code `PreToolUse` hook that `install.sh` registers. In Victor's repos that have an `ARCHITECTURE.md`, it blocks an agent's `git commit` that changes the project's structure without touching it. A commit can pass with the trailer `Arch-Map: unchanged — <reason>`.
 - `templates/ARCHITECTURE.md`. The starting point for every project's architecture map.
 

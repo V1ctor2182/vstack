@@ -30,5 +30,3 @@ A long justification without a proven keep-list exception is a confession. Kill 
 Every flag names code inside the scope and tells the truth. I invent nothing. I touch comments and identify refactor targets. I never write application code.
 
 Report only. Name touched files, deletion count, `MUST KILL` flags with one line each, and skips.
-
-Claude Code host: pstack skills live in `.claude/skills/`, and `.claude/pstack/PSTACK.md` maps Cursor-specific instructions to this host.
