@@ -31,7 +31,7 @@ Check the owner when you start work in a repo: `gh repo view --json owner -q .ow
 A task is **small** when the human is present and the change is reviewable in one sitting. Anything else is **large**: it crosses modules, is a one-way door, runs unattended, or spans PRs.
 
 - Small: no playbook steps and no task list under three steps. Sketch the design inline and write the code yourself.
-- Large: open the matching playbook and follow its steps.
+- Large: open the matching playbook and follow its steps. A large feature or bug fix starts from its issue, with the plan posted there first (**principle-proposals-become-issues**).
 - Subagents, **architect**, and **interrogate** run only when the human asks or the task is large.
 - Never trimmed: a short task still ends with proof it works.
 - A UI with no chosen direction starts with the **prototype** playbook, whatever the size.
@@ -93,7 +93,7 @@ Check these before you build, write, or look something up. When none fits, say s
 - **principle-commit-and-merge-cadence.** Starting a task, committing, pushing, branching, or merging.
 - **principle-keep-the-architecture-map.** A repo that has an `ARCHITECTURE.md`, and a change that reshapes it.
 - **principle-guard-the-context-window.** Context is filling up.
-- **principle-proposals-become-issues.** Proposing work outside the current change.
+- **principle-proposals-become-issues.** Proposing work outside the current change, filing or starting a feature or bug issue, or a large feature or bug fix Victor asks for.
 
 ## Playbooks
 
