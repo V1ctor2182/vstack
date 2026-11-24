@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Commit and Merge Cadence
 
-Branches stay healthy when work moves in small, verified steps and lands soon. Long-lived branches, giant PRs, and deep stacks rot. pstack's `playbooks/opening-a-pr.md` and `playbooks/shipping.md` hold the mechanics. This sets the cadence.
+Branches stay healthy when work moves in small, verified steps and lands soon. Long-lived branches, giant PRs, and deep stacks rot. vstack's `playbooks/opening-a-pr.md` and `playbooks/shipping.md` hold the mechanics. This sets the cadence.
 
 ## Commit
 
@@ -42,7 +42,7 @@ Never create a worktree in `/tmp`. Remove the worktree when its branch merges.
 ## Merge
 
 - **Merge only when all hold:** the change is verified on the real artifact, CI is green, review threads are resolved, and the branch is rebased on current `main` with no conflicts. Green CI alone is not enough.
-- **Victor merges** unless he granted merge rights for this work, such as an autopilot run. An agent with the grant follows pstack's Shipping playbook.
+- **Victor merges** unless he granted merge rights for this work, such as an autopilot run. An agent with the grant follows vstack's Shipping playbook.
 - **Squash-merge. Land stacks bottom-up.** After the parent lands, rebase the child onto `main` and retarget its base to `main`.
 - **Clean up at merge time.** Whenever a merge happens in a session (you merged it, or Victor says he did), clean only that branch: `git fetch --prune`, delete the local branch and its worktree, delete the remote branch if GitHub didn't, and rebase each child PR onto `main` with its base retargeted to `main`. Leave every other branch to `/housekeep`.
 - **Record context at merge time.** In Victor's repos, after the cleanup, list what the merged change decided that the code doesn't say: a choice and its reason, a constraint, a convention. Give at most five lines, one claim each, or say "nothing to record". Victor confirms in one reply. Write only the confirmed lines with **context-record**, and commit them as `docs(context): ...`. In the same list, name any new reusable UI component the change added that victor-ui lacks (**principle-ui-from-victor-ui**). For each one Victor confirms, follow victor-ui's process for adding it. Also name any new floor line the design log proposes (**principle-design-floor**).

@@ -1,6 +1,6 @@
 # Architecture: vstack
 
-> Last verified against code: 2026-11-23 (one mode, phases 2 to 4 of #21)
+> Last verified against code: 2026-11-23 (Cursor wording removed, session hook carries no host mappings)
 
 ## Purpose
 
@@ -31,11 +31,11 @@ flowchart LR
 | Name | Path | Owns | Level | Why this level | Room |
 |---|---|---|---|---|---|
 | vstack-mode | skills/vstack-mode | the one rulebook: process sizing, when to ask, the index, Victor's tools | module | — | — |
-| playbooks | skills/vstack-mode/playbooks, scripts, references | step lists for large tasks and their helper scripts | module | — | — |
+| playbooks | skills/vstack-mode/playbooks, scripts | step lists for large tasks and their helper scripts | module | — | — |
 | principles | skills/principle-* | one rule each, read on trigger | module | — | — |
 | workflow skills | skills/architect, how, why, interrogate, and the rest | one job each, read on trigger | module | — | — |
 | agents | agents/ | vstack-agent and comment-sicko subagents | module | — | — |
-| session hook | hooks/session.sh, hooks/session.md | turning vstack-mode on, Cursor-to-Claude-Code mappings | module | — | — |
+| session hook | hooks/session.sh, hooks/session.md | turning vstack-mode on | module | — | — |
 | housekeep | skills/housekeep | `/housekeep` branch-health command | module | — | — |
 | automate-me | skills/automate-me | mining sessions and proposing rule changes as issues | module | — | — |
 | arch-map-check | hooks/arch-map-check.sh | blocking commits that reshape a repo with a map and leave the map alone | module | — | — |

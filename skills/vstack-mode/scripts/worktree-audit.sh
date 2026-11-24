@@ -55,23 +55,22 @@ else
 	stat_fmt=(-f '%m %N'); fmt_day() { date -r "$1" '+%Y-%m-%d'; }
 fi
 
-# PR state by branch, fetched once as [{number, state, head}] with a lowercase
-# state. Origin when its CLI can read this repo's PRs, otherwise gh. Empty when
-# neither can.
+# PR state by branch, fetched once from gh as [{number, state, head}] with a
+# lowercase state. Empty when gh cannot read this repo's PRs.
 prs=$(mktemp)
-if command -v origin >/dev/null 2>&1 \
-	&& raw=$(origin pr list --author "@me" --state all --limit 1000 \
-		--json number,status,headRef 2>/dev/null); then
-	printf '%s' "$raw" | jq '[.[] | {number, state: .status, head: .headRef}]' > "$prs" 2>/dev/null
-elif raw=$(gh pr list --author "@me" --state all --limit 1000 \
+if raw=$(gh pr list --author "@me" --state all --limit 1000 \
 	--json number,state,headRefName 2>/dev/null); then
 	printf '%s' "$raw" | jq '[.[] | {number, state: (.state | ascii_downcase), head: .headRefName}]' > "$prs" 2>/dev/null
 fi
 [ -s "$prs" ] || echo "[]" > "$prs"
 
-# Transcripts dir: ~/.cursor/projects/<slugified-repo-path>/agent-transcripts.
-slug=$(printf '%s' "$main_wt" | sed 's#^/##; s#/#-#g')
-transcripts="$HOME/.cursor/projects/$slug/agent-transcripts"
+# Claude Code keeps a session's transcripts as *.jsonl under
+# ~/.claude/projects/<slug>, where <slug> is the session's start folder with
+# every "/" and "." turned into "-". A session started in the main worktree or
+# in the worktree itself can have operated there, so both folders are searched.
+projects="$HOME/.claude/projects"
+slug_of() { printf '%s' "$1" | sed 's#[^A-Za-z0-9]#-#g'; }
+main_transcripts="$projects/$(slug_of "$main_wt")"
 now=$(date +%s)
 
 echo "# base: $base"
@@ -111,8 +110,12 @@ git worktree list --porcelain | awk '/^worktree /{print $2}' | while read -r wt;
 	# Most recent chat whose transcript operated in this worktree. Match path
 	# followed by "/" or a quote so glint-482 does not match glint-482-r37.
 	last="-"; last_ts=0
-	if [ -d "$transcripts" ]; then
-		f=$(rg -l -e "${wt}/" -e "${wt}\"" "$transcripts" 2>/dev/null \
+	dirs=()
+	for d in "$main_transcripts" "$projects/$(slug_of "$wt")"; do
+		[ -d "$d" ] && dirs+=("$d")
+	done
+	if [ "${#dirs[@]}" -gt 0 ]; then
+		f=$(grep -rlF --include='*.jsonl' -e "${wt}/" -e "${wt}\"" "${dirs[@]}" 2>/dev/null \
 			| xargs stat "${stat_fmt[@]}" 2>/dev/null | sort -rn | head -1)
 		if [ -n "$f" ]; then last_ts=$(echo "$f" | awk '{print $1}')
 			last=$(fmt_day "$last_ts" 2>/dev/null); fi

@@ -17,7 +17,7 @@ Run `git fetch --prune`. Then gather, for every local branch, remote branch of V
 - Unpushed commits and uncommitted changes.
 - The PR, if any: state, draft, CI result, conflicts, review threads open, and its base branch.
 
-For worktrees, run pstack's `~/.claude/skills/vstack-mode/scripts/worktree-audit.sh`. Note each worktree's location:
+For worktrees, run `~/.claude/skills/vstack-mode/scripts/worktree-audit.sh`. Note each worktree's location:
 
 - `~/victor/<repo>-<topic>` is the standard place.
 - Under `~/Happy/Workspaces/` or `.claude/worktrees/`, a tool created it and tracks its path. Report it, never move it.
