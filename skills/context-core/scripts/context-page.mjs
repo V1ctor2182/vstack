@@ -84,6 +84,10 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tags span { padding: 0 8px; border-radius: 999px; background: var(--tint); font-size: 13px; }
+.steps > li { padding: 10px 0; }
+.steps > li + li { margin-top: 0; border-top: 1px solid var(--line); }
+.steps .when { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+.steps dl { margin-top: 8px; }
 @media (max-width: 600px) {
   body { padding-top: 28px; }
   .record > summary { grid-template-columns: 7px minmax(0, 1fr); row-gap: 2px; }
@@ -131,6 +135,19 @@ function recordHtml(document, summaries) {
 </details>`;
 }
 
+function runHtml(run) {
+  const last = run.rows.at(-1)?.ts ?? "";
+  const steps = run.rows.map((row) => `<li><span class="when">${esc(String(row.ts).slice(0, 16).replace("T", " "))} · ${esc(row.phase)}</span>
+<p>${esc(row.decision)}</p><dl>${[["Why", row.why], ["Evidence", row.evidence], ["Result", row.result]]
+    .filter(([, value]) => value)
+    .map(([label, value]) => `<dt>${label}</dt><dd>${esc(value)}</dd>`)
+    .join("")}</dl></li>`);
+  return `<details class="record" id="r-${esc(run.name)}">
+<summary><span class="chev"></span><span class="title">${esc(run.name)}</span><span class="meta"><span>${run.rows.length} ${run.rows.length === 1 ? "row" : "rows"}</span><time datetime="${esc(last)}">${esc(String(last).slice(0, 10))}</time></span></summary>
+<div class="body"><ul class="steps">${steps.join("\n")}</ul></div>
+</details>`;
+}
+
 function byActiveThenNewest(left, right) {
   const rank = (document) => (document.state === "active" ? 0 : 1);
   return rank(left) - rank(right)
@@ -139,7 +156,8 @@ function byActiveThenNewest(left, right) {
 }
 
 // rooms: [{ path: "parent/child", contexts: [Context document] }]
-export function renderContextPage({ repoName, rooms }) {
+// runs: [{ name: "2026-01-02-task", rows: [{ ts, phase, decision, why, evidence, result }] }], newest first
+export function renderContextPage({ repoName, rooms, runs = [] }) {
   const groups = rooms
     .filter((room) => room.contexts.length > 0)
     .sort((left, right) => left.path.localeCompare(right.path));
@@ -151,6 +169,12 @@ export function renderContextPage({ repoName, rooms }) {
 <summary><h2>${esc(room.path.replaceAll("/", " / "))}</h2><span class="count">${room.contexts.length}</span><span class="chev"></span></summary>
 ${[...room.contexts].sort(byActiveThenNewest).map((document) => recordHtml(document, summaries)).join("\n")}
 </details>`);
+  if (runs.length > 0) {
+    sections.push(`<details class="room" open>
+<summary><h2>Recent runs</h2><span class="count">${runs.length}</span><span class="chev"></span></summary>
+${runs.map(runHtml).join("\n")}
+</details>`);
+  }
   return `<!doctype html>
 <html lang="en">
 <head>

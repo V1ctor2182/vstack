@@ -1,15 +1,27 @@
 #!/usr/bin/env bash
 # Append a well-formed row to a show-me-your-work decision log (TSV).
-# Usage: log.sh <logfile> <phase> <decision> <why> <evidence> <result>
+# Usage: log.sh <task-slug|logfile> <phase> <decision> <why> <evidence> <result>
+# A first argument with no "/" and no ".tsv" is a task slug. It resolves to
+# .vibehub/runs/<date>-<slug>.tsv at the repo root, and to the file that slug
+# already has when one exists, so a run that crosses midnight keeps one log.
 set -euo pipefail
 
 if [ "$#" -ne 6 ]; then
-	printf 'usage: log.sh <logfile> <phase> <decision> <why> <evidence> <result>\n' >&2
+	printf 'usage: log.sh <task-slug|logfile> <phase> <decision> <why> <evidence> <result>\n' >&2
 	exit 1
 fi
 
 logfile="$1"
 shift
+
+case "$logfile" in
+	*/*|*.tsv) ;;
+	*)
+		runs="$(git rev-parse --show-toplevel 2>/dev/null || pwd)/.vibehub/runs"
+		existing="$(ls "$runs"/????-??-??-"$logfile".tsv 2>/dev/null | tail -n 1 || true)"
+		logfile="${existing:-$runs/$(date -u +%Y-%m-%d)-$logfile.tsv}"
+		;;
+esac
 
 logdir="$(dirname "$logfile")"
 if [ -n "$logdir" ] && [ "$logdir" != "." ] && [ ! -d "$logdir" ]; then

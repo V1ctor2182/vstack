@@ -1,6 +1,6 @@
 ---
 name: show-me-your-work
-description: "Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, result). Local by default; commit it when a reviewer needs the trail to trust the result. Use for /show-me-your-work, autonomous or multi-phase runs, or work a human reviews after stepping away."
+description: "Keep a reviewable decision trail for long-running or unattended work: a TSV log with one row per decision (what, why, evidence, result). It lives in the repo's `.vibehub/runs/` and is committed with the work. Use for /show-me-your-work, autonomous or multi-phase runs, or work a human reviews after stepping away."
 disable-model-invocation: true
 ---
 
@@ -35,7 +35,7 @@ ts	phase	decision	why	evidence	result
 
 Write each entry the way you'd tell a teammate what you did. Plain words, concrete actions, no AI speak or abstract jargon (the **writing-style** skill applies to log text too).
 
-Use the helper `scripts/log.sh <logfile> <phase> <decision> <why> <evidence> <result>`. It stamps `ts`, writes the header on first use, strips stray tabs/newlines, and prefixes any cell starting with `=`, `+`, `-`, or `@` with a single quote. A bare `printf` appending a row works too, but mind those same bytes if cells come from generated or user-supplied text.
+Use the helper `scripts/log.sh <task-slug> <phase> <decision> <why> <evidence> <result>`. A bare slug resolves to this run's file under `.vibehub/runs/`, and a path is used as given. It stamps `ts`, writes the header on first use, strips stray tabs/newlines, and prefixes any cell starting with `=`, `+`, `-`, or `@` with a single quote. A bare `printf` appending a row works too, but mind those same bytes if cells come from generated or user-supplied text.
 
 Log decision points and checkpoints, not every action: a fork chosen, a unit completed with its verification result, a pivot or revert with its trigger, a blocker surfaced, a gate fixed. For loop runs, one row per iteration. Skip the trivial and self-evident.
 
@@ -43,9 +43,9 @@ A run is one agent conversation, including its later turns and any summary of it
 
 ## Where it lives
 
-By default the log is a working artifact, not committed. Keep it at `decisions.tsv` in the work dir, or `.audit/<task-slug>.tsv` when several efforts run at once, and leave it out of git.
+The log lives with the repo's VibeHub data, at `.vibehub/runs/<date>-<task-slug>.tsv`. Commit it with the work it describes. In a repo that is not the human's, keep it at that path and leave it out of the commit.
 
-Commit it only when the work is ambitious enough that a reviewer needs the trail to trust the result.
+It is not Context: agents do not read it before a task, and `context-query` does not return it. `vh context page` shows the recent runs.
 
 ## Rules
 
@@ -73,9 +73,13 @@ Before handing back, get a review from a different model family from the one tha
 
 Every reply for a run that produced a trail ends with an "Attention" section. Lead with the reviewer's model on its own line (`reviewed by <model>`), then list each flag pointing to specific rows or moments. "No flags" is a valid value. The model name is not.
 
+## Promote what was settled
+
+After the audit, list at most five things this run settled that the code does not say. The human confirms. Write only the confirmed ones with **context-record**.
+
 ## Reviewing the trail
 
-Read top to bottom, follow the evidence pointers, spot-check. GitHub renders a committed TSV as a table. `column -s$'\t' -t decisions.tsv` renders it in a terminal.
+Read top to bottom, follow the evidence pointers, spot-check. GitHub renders a committed TSV as a table. `column -s$'\t' -t <logfile>` renders it in a terminal, and `vh context page` shows it beside the repo's Context.
 
 ## Composing this skill
 

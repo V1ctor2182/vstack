@@ -2499,6 +2499,26 @@ function contextOperation(operation, repo, input, options = {}) {
   throw new VibeHubError("unsupported_operation", `Unsupported context operation: ${operation}`);
 }
 
+// Decision trails written by the show-me-your-work skill. They are not Context,
+// so only the page reads them. Newest first, ten at most.
+function readRuns(dir) {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((name) => name.endsWith(".tsv"))
+    .sort()
+    .reverse()
+    .slice(0, 10)
+    .map((name) => {
+      const [header = "", ...lines] = readFileSync(join(dir, name), "utf8").split("\n").filter((line) => line.trim());
+      const columns = header.split("\t");
+      const rows = lines.map((line) => {
+        const cells = line.split("\t");
+        return Object.fromEntries(columns.map((column, index) => [column, cells[index] ?? ""]));
+      });
+      return { name: name.slice(0, -4), rows };
+    });
+}
+
 // The page is a view for the human, not project state, so it is written
 // outside the repo by default and never under .vibehub/.
 function contextPage(repo, repository, out) {
@@ -2513,12 +2533,14 @@ function contextPage(repo, repository, out) {
     byRoom.set(room, [...(byRoom.get(room) ?? []), document]);
   }
   const rooms = [...byRoom].map(([roomPath, contexts]) => ({ path: roomPath, contexts }));
+  const runs = readRuns(join(repository.paths.root, "runs"));
   mkdirSync(dirname(path), { recursive: true });
-  writeFileSync(path, renderContextPage({ repoName, rooms }));
+  writeFileSync(path, renderContextPage({ repoName, rooms, runs }));
   return {
     status: "written",
     path,
     rooms: rooms.length,
+    runs: runs.length,
     contexts: repository.contexts.documents.size,
     active: [...repository.contexts.documents.values()].filter(({ document }) => document.state === "active").length,
   };

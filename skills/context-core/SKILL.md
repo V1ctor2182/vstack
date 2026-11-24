@@ -17,7 +17,7 @@ node ~/.claude/vstack/skills/context-core/scripts/vh.mjs <group> <operation> --r
 Below, `vh` means that command. Each call prints a JSON envelope. Only `ok:true` means it succeeded or persisted anything.
 
 - `scripts/vh.mjs`: context, room, source, and project operations.
-- `scripts/context-page.mjs`: the HTML for `vh context page --repo <root> [--out <file>]`, a read-only page of every Context grouped by Room. The default output is `~/.cache/vstack/context/<repo-folder>.html`.
+- `scripts/context-page.mjs`: the HTML for `vh context page --repo <root> [--out <file>]`, a read-only page of every Context grouped by Room, followed by the ten newest decision trails from `.vibehub/runs/`. The default output is `~/.cache/vstack/context/<repo-folder>.html`.
 - `contracts/context.schema.json`: one Context document.
 - `contracts/room.schema.json`: one Room document.
 - `contracts/project-format.schema.json` and `contracts/versions.json`: the `.vibehub/` format version.
