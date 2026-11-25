@@ -39,7 +39,7 @@ flowchart LR
 | housekeep | skills/housekeep | `/housekeep` branch-health command | module | — | — |
 | automate-me | skills/automate-me | mining sessions and proposing rule changes as issues | module | — | — |
 | arch-map-check | hooks/arch-map-check.sh | blocking commits that reshape a repo with a map and leave the map alone | module | — | — |
-| templates | templates/ | ARCHITECTURE.md skeleton | module | — | — |
+| templates | templates/ | ARCHITECTURE.md skeleton, issue templates | module | — | — |
 | context layer | skills/context-* | recording and reading project context in `.vibehub/rooms/` | module | — | — |
 | installer | install.sh | symlinks, stale-link cleanup, hook registration | module | — | — |
 
