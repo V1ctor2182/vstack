@@ -27,6 +27,8 @@ Decide at the start of every task, and say it in one line ("Same branch, continu
 
 Never create a worktree in `/tmp`. Remove the worktree when its branch merges.
 
+**Catch merges made elsewhere.** At the start of a task in a repo, find worktrees whose branch has a merged PR. Remove each one with no uncommitted or unpushed work, and say which in one line. Leave the rest and name them.
+
 ## Push and branch
 
 - **One branch per change**, cut from a fresh `main`, named `type/short-description`. Never commit directly to `main`.
