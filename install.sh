@@ -34,6 +34,7 @@ check() {
   report "writing-style" "$(if [ -f "$claude/skills/writing-style/SKILL.md" ]; then echo yes; else echo no; fi)" "in a tool factory checkout that stays on main: node factory/bin/factory.mjs link writing-style --global"
   report "victor-ui" "$(has_mcp victor-ui)" "$(mcp_fix victor-ui)"
   report "artifact-index" "$(has_mcp artifact-index)" "$(mcp_fix artifact-index)"
+  report "nomi" "$(has_mcp nomi)" "$(mcp_fix nomi)"
   if [ -n "$missing" ]; then echo "Some tools are missing. vstack still loads. The rules that name them will say so."; fi
 }
 if [ "${1:-}" = "--check" ]; then check; exit 0; fi

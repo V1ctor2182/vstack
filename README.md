@@ -8,7 +8,7 @@ Victor's agent skills for Claude Code. vstack began as a layer on [pstack](https
 ./install.sh
 ```
 
-The script symlinks every skill into `~/.claude/skills/` and every agent into `~/.claude/agents/`, removes its own links to skills it no longer has, and registers `hooks/session.sh` so every session starts in `vstack-mode`. `vstack-mode` also points to Victor's own tools: the tool factory (`factory`, `writing-style`), victor-ui, and artifact-index. The script does not install those. It ends by checking them and printing the fix for each one that is missing. `./install.sh --check` runs only the check.
+The script symlinks every skill into `~/.claude/skills/` and every agent into `~/.claude/agents/`, removes its own links to skills it no longer has, and registers `hooks/session.sh` so every session starts in `vstack-mode`. `vstack-mode` also points to Victor's own tools: the tool factory (`factory`, `writing-style`), victor-ui, Nomi, and artifact-index. The script does not install those. It ends by checking them and printing the fix for each one that is missing. `./install.sh --check` runs only the check.
 
 ## Skills
 
@@ -22,7 +22,7 @@ The skills that came from pstack are listed in `NOTICE.md`. vstack's own:
 | `principle-keep-the-architecture-map` | A repo that has an `ARCHITECTURE.md`. Keep it matching the code, updated in the same change. |
 | `principle-commit-and-merge-cadence` | Starting a task, committing, pushing, branching, stacking, merging. Where to work, when each step happens, and what must hold before a merge. |
 | `principle-grow-boundaries-on-demand` | Adding an abstraction, layer, module, or service. Modules first, abstract on the second use, split services only for a named reason. |
-| `principle-ui-from-victor-ui` | Writing a new UI component. Start from Victor's gallery through the victor-ui MCP, adapt, verify the render. |
+| `principle-ui-from-victor-ui` | Writing a new UI component or screen. Start from Victor's gallery (victor-ui MCP) and his saved references (Nomi MCP), adapt, verify the render. |
 | `principle-design-floor` | Building or showing any UI. Nine things Victor never wants to see, a screenshot check before showing, and a complaint log that grows the floor. |
 | `context-query` | Before working in a repo with `.vibehub/`, and for why-questions. Reads recorded context from its Rooms. |
 | `context-record` | Victor says 记一下, or confirms merge-time candidates. Writes one claim per document into the owning Room. |

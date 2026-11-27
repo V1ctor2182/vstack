@@ -51,6 +51,7 @@ Check these before you build, write, or look something up. When none fits, say s
 
 - A script or CLI: run `factory list`. A tool useful in more than one repo becomes a factory atom.
 - A UI component, or a design the human liked before: **principle-ui-from-victor-ui**.
+- A design, paper, link or idea the human saved, and their personal tasks: the Nomi MCP. Search with `nomi_search` or `nomi_tasks`; save what they hand you with `nomi_capture`.
 - A web page before and after a change: `page-record` and `page-diff`.
 - A doc or a design for the human: publish it as an artifact and register it in artifact-index.
 - **writing-style** lives in the tool factory. `factory link writing-style --global` installs it. If it is missing, say so.
