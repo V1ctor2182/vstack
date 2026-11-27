@@ -30,6 +30,10 @@ The skills that came from pstack are listed in `NOTICE.md`. vstack's own:
 | `context-core` | Not invoked. The `vh.mjs` helper and schemas, copied from [VibeHub](https://github.com/VW-ai/vibehub-plugin) `fe01e819` (Apache-2.0), context layer only. |
 | `housekeep` | Only when you type `/housekeep`. Audits branches, worktrees, and PRs in the current repo, sorts uncommitted work into pushed branches once you confirm, fixes what is safe, reports the rest. |
 
+## Checks
+
+`node scripts/lint.mjs` fails when a skill or playbook names a skill, section, or file that does not exist, when frontmatter `name` differs from the folder, when `vstack-mode` passes 150 lines, when a skill is in no index, and when the session hook prints nothing. CI runs it with the script tests on every pull request.
+
 ## Hooks and templates
 
 - `hooks/session.sh` with `hooks/session.md`. Claude Code `SessionStart` and `UserPromptSubmit` hook. It turns on vstack-mode.

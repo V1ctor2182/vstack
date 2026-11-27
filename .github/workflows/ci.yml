@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@v2
+      - name: Lint skills, references, and hooks
+        run: node scripts/lint.mjs
+      - name: Playbook script tests
+        working-directory: skills/vstack-mode/scripts
+        run: |
+          bun install --frozen-lockfile
+          bun test watch-pr check-plan.test.ts
+          bun run typecheck
+      - name: Context layer tests
+        working-directory: skills/context-core/scripts
+        run: bun test
