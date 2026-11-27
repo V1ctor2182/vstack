@@ -1,6 +1,6 @@
 ---
 name: principle-ui-from-victor-ui
-description: "Apply before writing a new UI component (button, dialog, sidebar, form control, card, menu, and so on) in any project, before building a new site, app, or screen, and whenever Victor shares a link or image of a design he likes. Start from Victor's component gallery and saved references through the victor-ui MCP, adapt, and verify the render. Not for copy edits, bug fixes, or style tweaks to existing UI."
+description: "Apply before writing a new UI component (button, dialog, sidebar, form control, card, menu, and so on) in any project, before building a new site, app, or screen, and whenever Victor shares a link or image of someone else's design. Start from Victor's component gallery and saved references through the victor-ui MCP, adapt, and verify the render. Not for copy edits, bug fixes, or style tweaks to existing UI."
 disable-model-invocation: true
 ---
 
@@ -21,7 +21,11 @@ If the victor-ui tools aren't loaded in this session, say so and continue withou
 
 ## Save the designs Victor likes
 
-When Victor shares a link or an image and says he likes it, or that he wants something like it, save it in the same session. He doesn't have to say "remember".
+Save a design Victor likes in the same session. He doesn't have to say "remember".
+
+- **He says he likes it,** or wants something like it: save it.
+- **He shares someone else's design without saying,** a link or an image while the talk is about UI: ask in one line, "Save this to your references? What do you like about it?" Save on a yes. Drop it on a no or no answer. A design can be a counterexample, so never save one unasked.
+- **Don't ask** for a screenshot of his own project or of a bug.
 
 1. **Ask only what is missing.** You need the kind (`site`, `app`, `mobile`, or `style` for a look with no particular screen) and what he likes about it, in his words. Infer the kind when it is plain. If he didn't say what he likes, ask in one line.
 2. **Save it** from the victor-ui checkout at `~/victor/victor-ui`: `node scripts/add-ref.mjs --url <link> --kind <kind> --likes "<his words>"`, plus `--aspect`, `--tags` (the page within it, such as `hero`), and `--project` when they apply. For an image, pass `--file`. An image pasted into chat with no file on disk can't be saved: ask for the file or a link.

@@ -78,7 +78,7 @@ Check these before you build, write, or look something up. When none fits, say s
 - **principle-encode-lessons-in-structure.** Writing the same instruction a second time.
 
 **UI**
-- **principle-ui-from-victor-ui.** About to write a new UI component or build a new site, app, or screen, and when the human shares a design they like.
+- **principle-ui-from-victor-ui.** About to write a new UI component or build a new site, app, or screen, and when the human shares someone else's design.
 - **principle-design-floor.** Building or restyling a UI, and before showing one.
 
 **Verification**
