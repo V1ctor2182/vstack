@@ -1,6 +1,6 @@
 ---
 name: principle-ui-from-victor-ui
-description: "Apply before writing a new UI component (button, dialog, sidebar, form control, card, menu, and so on) in any project, before building a new site, app, or screen, and whenever Victor shares a link or image of someone else's design. Start from Victor's component gallery and saved references through the victor-ui MCP, adapt, and verify the render. Not for copy edits, bug fixes, or style tweaks to existing UI."
+description: "Apply before writing a new UI component (button, dialog, sidebar, form control, card, menu, and so on) in any project, before building a new site, app, or screen, and whenever Victor shares a link or image of someone else's design. Start from Victor's component gallery (victor-ui MCP) and his saved references (Nomi MCP), adapt, and verify the render. Not for copy edits, bug fixes, or style tweaks to existing UI."
 disable-model-invocation: true
 ---
 
@@ -21,22 +21,23 @@ If the victor-ui tools aren't loaded in this session, say so and continue withou
 
 ## Save the designs Victor likes
 
-Save a design Victor likes in the same session. He doesn't have to say "remember".
+Saved references live in Nomi, not in victor-ui: victor-ui holds components only. Save a design Victor likes in the same session. He doesn't have to say "remember".
 
 - **He says he likes it,** or wants something like it: save it.
 - **He shares someone else's design without saying,** a link or an image while the talk is about UI: ask in one line, "Save this to your references? What do you like about it?" Save on a yes. Drop it on a no or no answer. A design can be a counterexample, so never save one unasked.
 - **Don't ask** for a screenshot of his own project or of a bug.
 
 1. **Ask only what is missing.** You need the kind (`site`, `app`, `mobile`, or `style` for a look with no particular screen) and what he likes about it, in his words. Infer the kind when it is plain. If he didn't say what he likes, ask in one line.
-2. **Save it** from the victor-ui checkout at `~/victor/victor-ui`: `node scripts/add-ref.mjs --url <link> --kind <kind> --likes "<his words>"`, plus `--aspect`, `--tags` (the page within it, such as `hero`), and `--project` when they apply. For an image, pass `--file`. An image pasted into chat with no file on disk can't be saved: ask for the file or a link.
-3. **Land it.** Commit the saves of one session together on a `refs/<date>` branch and open a victor-ui PR. This is the one change to victor-ui allowed as a side effect of other work.
-4. **Confirm in one line:** "Saved to victor-ui as `site`: you like the dense sidebar and the single accent color."
+2. **Save it** with the Nomi MCP. A link: `nomi_capture` with `text` = the link and his words, `tags` = `["design-ref", "<kind>"]`, plus the page within it (such as `hero`) and the project when they apply. An image file: `nomi_capture_image` with the file in base64, its filename, and his words as `text`; then add the same tags with `nomi_capture` only if the image needs a link beside it. An image pasted into chat with no file on disk can't be saved: ask for the file or a link.
+3. **Confirm in one line:** "Saved to Nomi as `site`: you like the dense sidebar and the single accent color."
 
 ## Before building a site, app, or screen
 
-Call `search_references` with the kind you are building, then with words for the feel. Follow what Victor said he likes, not the screenshot's every detail. Say in one line which references shaped the work, or "No saved reference fit."
+Call `nomi_search` with `tags: ["design-ref"]` and the kind you are building, then with words for the feel. Also try `family: "design"`, which finds designs Nomi filed on its own. Follow what Victor said he likes, not the screenshot's every detail. Say in one line which references shaped the work, or "No saved reference fit."
 
 When two or more references share a quality Victor named, propose a line for `../principle-design-floor/taste.md` as a merge-time candidate (**principle-commit-and-merge-cadence**), quoting both. Victor confirms before it joins.
+
+If the Nomi tools aren't loaded in this session, say so and continue without them.
 
 ## Give new components back
 
