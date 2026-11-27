@@ -84,7 +84,7 @@ Check these before you build, write, or look something up. When none fits, say s
 **Verification**
 - **principle-prove-it-works.** After a task, before declaring done.
 - **principle-fix-root-causes.** Debugging.
-- **principle-attack-the-premise.** Two fixes on one premise have failed.
+- **principle-attack-the-premise.** A fix took effect and still failed, or two fixes on one premise have failed.
 - **principle-sequence-verifiable-units.** Multi-step work and stacked PRs.
 - **principle-earn-every-test.** Adding or editing a test.
 - **principle-test-behavior-not-implementation.** Writing or keeping a test.
