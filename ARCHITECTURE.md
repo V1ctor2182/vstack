@@ -53,7 +53,7 @@ flowchart LR
 - **Merge:** merge cleanup → agent lists context candidates → Victor confirms → context-record → `vh context put` → `.vibehub/rooms/<room>/` committed.
 - **Design complaint:** Victor calls a UI ugly or AI-ish (in any repo) → agent appends to `skills/principle-design-floor/log.md` in vstack → a repeat with no floor line becomes a merge-time candidate → Victor confirms → the line joins the floor table.
 - **Unattended run:** show-me-your-work → `log.sh <task-slug>` → `.vibehub/runs/<date>-<task-slug>.tsv`, committed with the work → `vh context page` shows the ten newest → Victor confirms what was settled → context-record.
-- **Learning:** Victor runs automate-me → it mines `~/.claude/projects` → at most three `proposed` issues here → Victor approves → the rule changes.
+- **Learning:** Victor runs automate-me → it mines `~/.claude/projects` → at most three `proposed` issues, each a code change, a check, or a prose rule, in the repo the change goes in → Victor approves → it lands.
 - **Pull request:** CI runs `node scripts/lint.mjs`, the playbook script tests, and the context layer test. A red check blocks the merge.
 - **Agent commit:** Claude Code PreToolUse → arch-map-check.sh → exit 2 with a message if the repo has an ARCHITECTURE.md and the structure changed without it.
 
