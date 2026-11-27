@@ -34,6 +34,18 @@ The skills that came from pstack are listed in `NOTICE.md`. vstack's own:
 
 `node scripts/lint.mjs` fails when a skill or playbook names a skill, section, or file that does not exist, when frontmatter `name` differs from the folder, when `vstack-mode` passes 150 lines, when a skill is in no index, and when the session hook prints nothing. CI runs it with the script tests on every pull request.
 
+Each rule a check enforces. A rule not in this table is prose only, so nothing fails when an agent skips it. When an agent repeats a prose-only mistake, add a row here rather than more words (**correct**).
+
+| Rule | Enforced by |
+|---|---|
+| Every skill, playbook, section, and link a file names exists | `scripts/lint.mjs` |
+| Frontmatter `name` matches the folder | `scripts/lint.mjs` |
+| `vstack-mode` stays within 150 lines | `scripts/lint.mjs` |
+| Every skill is in an index | `scripts/lint.mjs` |
+| The session hook turns vstack-mode on | `scripts/lint.mjs` |
+| A commit that reshapes a repo with an `ARCHITECTURE.md` updates it | `hooks/arch-map-check.sh` |
+| Playbook helper scripts behave as tested | CI |
+
 ## Hooks and templates
 
 - `hooks/session.sh` with `hooks/session.md`. Claude Code `SessionStart` and `UserPromptSubmit` hook. It turns on vstack-mode.
