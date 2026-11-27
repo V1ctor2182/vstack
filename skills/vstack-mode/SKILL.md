@@ -50,7 +50,7 @@ A task is **small** when the human is present and the change is reviewable in on
 Check these before you build, write, or look something up. When none fits, say so in one line.
 
 - A script or CLI: run `factory list`. A tool useful in more than one repo becomes a factory atom.
-- A UI component: **principle-ui-from-victor-ui**.
+- A UI component, or a design the human liked before: **principle-ui-from-victor-ui**.
 - A web page before and after a change: `page-record` and `page-diff`.
 - A doc or a design for the human: publish it as an artifact and register it in artifact-index.
 - **writing-style** lives in the tool factory. `factory link writing-style --global` installs it. If it is missing, say so.
@@ -78,7 +78,7 @@ Check these before you build, write, or look something up. When none fits, say s
 - **principle-encode-lessons-in-structure.** Writing the same instruction a second time.
 
 **UI**
-- **principle-ui-from-victor-ui.** About to write a new UI component.
+- **principle-ui-from-victor-ui.** About to write a new UI component or build a new site, app, or screen, and when the human shares someone else's design.
 - **principle-design-floor.** Building or restyling a UI, and before showing one.
 
 **Verification**

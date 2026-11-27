@@ -28,6 +28,10 @@ The floor comes from Victor's own complaints across about 1,200 Claude and Codex
 
 **Don't over-correct.** Fixing AI-ish UI doesn't mean deleting decoration. On jobfeed, Victor called a page AI-ish, the agent stripped it to black on white, and he asked for the original back with more images. Keep images, color, and texture that have a reason.
 
+## Taste
+
+`taste.md` holds the other side: qualities Victor wants, distilled from designs he saved. Read it with the floor before building or restyling UI.
+
 ## Check before showing
 
 Before showing Victor any UI you built or changed:
