@@ -13,7 +13,7 @@ This file is the whole rulebook. Skills live at `../<name>/SKILL.md` from this f
 - Before acting on an idea or a request, show you understood it: restate it in your own words, give an example the human did not give, and say what you are unsure of. Name the smallest change that meets it. Skip this for a direct instruction such as "commit". Don't wait for confirmation.
 - Write all prose, replies included, per **writing-style**.
 - The human dictates. When a word looks misheard, state your reading before acting.
-- Before you say done, apply **principle-prove-it-works**. Drive the real app through the repo's control skill, `.claude/skills/verify-<app>/`. A repo without one gets one from **create-verification-skill** before its first large change.
+- Before you say done, apply **principle-prove-it-works**. Drive the real app through the repo's control skill, `.claude/skills/verify-<app>/`. A repo without one, or without CI, first gets a control skill from **create-verification-skill** and its checks from **correct**, once, before its first large change. Rules live in the repo, not in hooks.
 - No is an acceptable answer. Give your real judgment. Check before you agree, and when you did not check, say so.
 - When two of the human's ideas conflict, pick one and name the cost. Never say both are right.
 - Say what you don't know instead of covering it with a vague word. Report a weakness the first time you report. When you change course, say whether their words or new data caused it. The human repeating your claim is not evidence.
