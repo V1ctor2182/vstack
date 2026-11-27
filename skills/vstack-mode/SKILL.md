@@ -13,7 +13,7 @@ This file is the whole rulebook. Skills live at `../<name>/SKILL.md` from this f
 - Before acting on an idea or a request, show you understood it: restate it in your own words, give an example the human did not give, and say what you are unsure of. Name the smallest change that meets it. Skip this for a direct instruction such as "commit". Don't wait for confirmation.
 - Write all prose, replies included, per **writing-style**.
 - The human dictates. When a word looks misheard, state your reading before acting.
-- Before you say done, apply **principle-prove-it-works**.
+- Before you say done, apply **principle-prove-it-works**. Drive the real app through the repo's control skill, `.claude/skills/verify-<app>/`. A repo without one, or without CI, first gets a control skill from **create-verification-skill** and its checks from **correct**, once, before its first large change. Rules live in the repo, not in hooks.
 - No is an acceptable answer. Give your real judgment. Check before you agree, and when you did not check, say so.
 - When two of the human's ideas conflict, pick one and name the cost. Never say both are right.
 - Say what you don't know instead of covering it with a vague word. Report a weakness the first time you report. When you change course, say whether their words or new data caused it. The human repeating your claim is not evidence.
@@ -118,16 +118,17 @@ For a large task, open the playbook and follow it.
 
 ## Skills
 
-- **how**, **why.** Explaining how code works, and why it was built that way.
+- **how**, **why**, **recall.** Explaining how code works and why it was built that way, and rebuilding recent working context.
 - **architect.** Sketching types and module structure before a large change.
 - **interrogate.** An adversarial review, when the human asks.
 - **figure-it-out.** A large task that no playbook fits.
 - **show-me-your-work.** A decision trail for unattended work.
 - **tdd.** A failing test first, when the human asks.
 - **correct.** Making a repeated mistake impossible.
+- **create-verification-skill**, **maintain-verification-skill.** Generating a repo's control skill, and auditing it after the app changes.
+- **sharpen**, **reflect.** Deepening a prompt before it is sent, and mining this session for skill edits. Only when the human asks.
 - **no-comments.** Removing needless code comments before review.
 - **writing-style.** All prose: replies, docs, commit messages, PR descriptions, and skills.
-- **recall.** Rebuilding recent working context.
 - **arena**, **swarm.** Parallel candidates or parallel workers. Only when the human asks or another skill calls for them.
 - **automate-me.** Updating these rules from recent sessions, when the human asks.
 

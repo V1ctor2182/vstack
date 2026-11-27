@@ -1,6 +1,6 @@
 # Architecture: vstack
 
-> Last verified against code: 2026-11-23 (Cursor wording removed, session hook carries no host mappings)
+> Last verified against code: 2026-11-27 (lint and CI added)
 
 ## Purpose
 
@@ -21,6 +21,8 @@ flowchart LR
   mode --> tools[Victor's tools: factory, victor-ui, artifact-index]
   settings --> hook[hooks/arch-map-check.sh]
   hook -.->|points to| template[templates/ARCHITECTURE.md]
+  lint[scripts/lint.mjs] -.->|checks| skills
+  ci[.github/workflows/ci.yml] --> lint
   mode --> ctx[context-* skills]
   ctx --> vh[context-core/scripts/vh.mjs]
   vh --> rooms[(repo .vibehub/rooms)]
@@ -41,6 +43,8 @@ flowchart LR
 | arch-map-check | hooks/arch-map-check.sh | blocking commits that reshape a repo with a map and leave the map alone | module | — | — |
 | templates | templates/ | ARCHITECTURE.md skeleton, issue templates | module | — | — |
 | context layer | skills/context-* | recording and reading project context in `.vibehub/rooms/` | module | — | — |
+| lint | scripts/lint.mjs | failing on references, frontmatter, the mode's line budget, NOTICE, and the session hook | module | — | — |
+| CI | .github/workflows/ci.yml | running the lint and the script tests on every PR | module | — | — |
 | installer | install.sh | symlinks, stale-link cleanup, hook registration | module | — | — |
 
 ## Key flows
@@ -49,7 +53,8 @@ flowchart LR
 - **Merge:** merge cleanup → agent lists context candidates → Victor confirms → context-record → `vh context put` → `.vibehub/rooms/<room>/` committed.
 - **Design complaint:** Victor calls a UI ugly or AI-ish (in any repo) → agent appends to `skills/principle-design-floor/log.md` in vstack → a repeat with no floor line becomes a merge-time candidate → Victor confirms → the line joins the floor table.
 - **Unattended run:** show-me-your-work → `log.sh <task-slug>` → `.vibehub/runs/<date>-<task-slug>.tsv`, committed with the work → `vh context page` shows the ten newest → Victor confirms what was settled → context-record.
-- **Learning:** Victor runs automate-me → it mines `~/.claude/projects` → at most three `proposed` issues here → Victor approves → the rule changes.
+- **Learning:** Victor runs automate-me → it mines `~/.claude/projects` → at most three `proposed` issues, each a code change, a check, or a prose rule, in the repo the change goes in → Victor approves → it lands.
+- **Pull request:** CI runs `node scripts/lint.mjs`, the playbook script tests, and the context layer test. A red check blocks the merge.
 - **Agent commit:** Claude Code PreToolUse → arch-map-check.sh → exit 2 with a message if the repo has an ARCHITECTURE.md and the structure changed without it.
 
 ## Boundaries and invariants
@@ -61,6 +66,7 @@ flowchart LR
 - `install.sh` is idempotent. Rerunning it adds nothing twice.
 - In repos Victor doesn't own, and in his repos without an ARCHITECTURE.md, the hook does nothing.
 - The context layer never loads or writes VibeHub Tickets, Goals, Epics, Evidence, or Outcomes; their files in a repo stay untouched.
+- A rule that a script can check lives in `scripts/lint.mjs`, not only in prose. Each lint failure names the fix.
 - arch-map-check ignores `.vibehub/`, so recording context never counts as a structural change.
 
 ## External dependencies

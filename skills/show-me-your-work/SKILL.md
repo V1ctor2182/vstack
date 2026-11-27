@@ -50,7 +50,7 @@ It is not Context: agents do not read it before a task, and `context-query` does
 ## Rules
 
 - Append-only. A wrong call gets a new row that supersedes it. Never edit or delete history.
-- Prefer evidence produced by committed scripts over hand-made one-offs (the **encode-lessons-in-structure** principle skill).
+- Prefer evidence produced by committed scripts over hand-made one-offs (**principle-encode-lessons-in-structure**).
 
 ## Audit the log against the transcript
 
@@ -64,7 +64,7 @@ Correct the log, not the story. The audit never edits or removes a row, even an 
 
 ## Cross-model review of the trail
 
-Before handing back, get a review from a different model family from the one that did the work. The gstack `codex` skill runs OpenAI Codex, if it is installed. If it is not, spawn a fresh subagent and say the review was same-family. Self-review is not a substitute. The reviewer reads the audit trail and the run's transcript, then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky. Pick each subagent's reasoning level and fast or standard speed for the job, per the Subagents section of the **vstack-mode** skill.
+Before handing back, get a review from a different model family from the one that did the work. The gstack `codex` skill runs OpenAI Codex, if it is installed. If it is not, spawn a fresh subagent and say the review was same-family. Self-review is not a substitute. The reviewer reads the audit trail and the run's transcript, then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky.
 
 - Decisions logged with weak or absent evidence.
 - Verification steps skipped or claimed without proof in the transcript.

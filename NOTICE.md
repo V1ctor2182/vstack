@@ -6,15 +6,19 @@ At the fork, the only changes were the `name:` field set to the directory name i
 
 On 2026-11-23, `poteto-mode` was merged into `vstack-mode`. Its playbooks, scripts, and references moved to `skills/vstack-mode/`. `agents/poteto-agent.md` became `agents/vstack-agent.md`. Skills and playbooks Victor does not use were removed. `automate-me` was rewritten.
 
+On 2026-11-27, `create-verification-skill`, `maintain-verification-skill`, `sharpen`, and `reflect` were copied from pstack at cursor/plugins@b7b93c3. Paths changed from `.cursor/` to `.claude/`, and the last paragraph of `reflect` now routes edits to the vstack repo.
+
 Forked skills still present:
 
 - `architect`
 - `arena`
 - `automate-me`
 - `correct`
+- `create-verification-skill`
 - `figure-it-out`
 - `how`
 - `interrogate`
+- `maintain-verification-skill`
 - `no-comments`
 - `principle-attack-the-premise`
 - `principle-boundary-discipline`
@@ -38,6 +42,8 @@ Forked skills still present:
 - `principle-test-behavior-not-implementation`
 - `principle-type-system-discipline`
 - `recall`
+- `reflect`
+- `sharpen`
 - `show-me-your-work`
 - `swarm`
 - `tdd`
