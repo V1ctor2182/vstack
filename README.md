@@ -45,6 +45,7 @@ Each rule a check enforces. A rule not in this table is prose only, so nothing f
 | The session hook turns vstack-mode on | `scripts/lint.mjs` |
 | A commit that reshapes a repo with an `ARCHITECTURE.md` updates it | `hooks/arch-map-check.sh` |
 | Playbook helper scripts behave as tested | CI |
+| Design floor lines 4, 6, 7, and 8: clipping, dead black, contrast, emoji as icons | `ui-floor` atom in the tool factory |
 
 ## Hooks and templates
 

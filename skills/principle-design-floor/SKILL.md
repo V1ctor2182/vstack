@@ -37,7 +37,7 @@ The floor comes from Victor's own complaints across about 1,200 Claude and Codex
 Before showing Victor any UI you built or changed:
 
 1. Screenshot it at real size, including open menus, hover and loading states, and a narrow width.
-2. Check it against each floor line. Fix what fails.
+2. Run `factory run ui-floor check <url>`. It fails on lines 4, 6, 7, and 8 by script. Check the other lines by eye. Fix what fails.
 3. Show it, with one line saying the check ran and what it fixed: "Floor check: removed card borders (3), shortened the subtitle (2)."
 
 ## Log complaints
