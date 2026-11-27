@@ -118,7 +118,7 @@ For a large task, open the playbook and follow it.
 
 ## Skills
 
-- **how**, **why.** Explaining how code works, and why it was built that way.
+- **how**, **why**, **recall.** Explaining how code works and why it was built that way, and rebuilding recent working context.
 - **architect.** Sketching types and module structure before a large change.
 - **interrogate.** An adversarial review, when the human asks.
 - **figure-it-out.** A large task that no playbook fits.
@@ -129,7 +129,6 @@ For a large task, open the playbook and follow it.
 - **sharpen**, **reflect.** Deepening a prompt before it is sent, and mining this session for skill edits. Only when the human asks.
 - **no-comments.** Removing needless code comments before review.
 - **writing-style.** All prose: replies, docs, commit messages, PR descriptions, and skills.
-- **recall.** Rebuilding recent working context.
 - **arena**, **swarm.** Parallel candidates or parallel workers. Only when the human asks or another skill calls for them.
 - **automate-me.** Updating these rules from recent sessions, when the human asks.
 
