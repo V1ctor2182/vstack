@@ -105,7 +105,6 @@ For a large task, open the playbook and follow it.
 - **investigation.** A read-only question.
 - **refactoring.** A structure change that keeps behavior.
 - **prototype.** A throwaway sketch to settle a decision.
-- **visual-parity.** Matching an existing UI exactly.
 - **multi-phase-plan.** Work that spans phases or stacked PRs.
 - **opening-a-pr.** The end of every other playbook.
 - **babysit.** Driving a PR to merge-ready.
